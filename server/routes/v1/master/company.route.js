@@ -1,19 +1,21 @@
 const express = require('express');
 const { CompanyController } = require('../../../controllers');
 
+const companyController = new CompanyController(); 
+
 
 const router = express.Router();
 
 router
     .route('/')
-    .get(CompanyController.getCompanies)
-    .post(CompanyController.createCompany)
+    .get(companyController.getCompanies)
+    .post(companyController.createCompany)
 
 router
     .route('/:companyId')
-    .get(CompanyController.getCompanyById)
-    .post(CompanyController.updateCompany)
-    .delete(CompanyController.deleteCompany)
+    .get(companyController.getCompanyById)
+    .post(companyController.updateCompany)
+    .delete(companyController.deleteCompany)
 
 
 module.exports = router;
