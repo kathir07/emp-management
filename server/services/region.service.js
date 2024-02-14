@@ -43,7 +43,7 @@ const queryRegions = async(filter, options) => {
  * @returns {Promise<Region>}
  */
 const getRegionById = async(regionId) => {
-    const region = await Region.findOne({_id: regionId})
+    const region = await Region.findOne({_id: regionId});
 
     if(!region) {
         throw new ApiError(httpStatus.NOT_FOUND, resMessage.REGION.NOT_FOUND);

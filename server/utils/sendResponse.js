@@ -1,4 +1,4 @@
-const httpStatus = require('http-status')
+const httpStatus = require('../helpers/httpStatus')
 
 /**
  * Send API response

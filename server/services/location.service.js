@@ -40,7 +40,7 @@ const queryLocations = async(filter, options) => {
  * @returns {Promise<Location>} 
 */
 const getLocationById = async(locationId) => {
-    const location =  Location.findById(locationId); 
+    const location =  await Location.findById(locationId); 
     if(!location) {
         throw new ApiError(httpStatus.NOT_FOUND, resMessage.LOCATION.NOT_FOUND);
     }

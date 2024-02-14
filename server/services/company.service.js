@@ -45,7 +45,7 @@ const queryCompanies = async(filter, options) => {
  * @returns {Promise<Company>}
  */
 const getCompanyById =  async(companyId) => {
-    const company = Company.findOne({_id: companyId}).populate('region', 'location')
+    const company = await Company.findOne({_id: companyId}).populate('region', 'location');
 
     if(!company) {
         throw new ApiError(httpStatus.NOT_FOUND, resMessage.COMPANY.NOT_FOUND);
