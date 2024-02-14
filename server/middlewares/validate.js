@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const httpStatus = require('http-status')
+const httpStatus =  require('../helpers/httpStatus')
 const pick = require('../utils/pick')
 const sendResponse = require('../utils/sendResponse');
 

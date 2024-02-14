@@ -4,7 +4,7 @@ const mongoSanitize = require('express-mongo-sanitize')
 const cors = require('cors')
 const routes = require('./routes/v1')
 const ApiError = require('./utils/ApiError')
-const httpStatus = require('http-status')
+const httpStatus = require('./helpers/httpStatus')
 
 const app = express()
 

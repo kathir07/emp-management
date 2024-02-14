@@ -1,5 +1,6 @@
-const httpStatus = require('http-status')
-const { Region } = require('../models')
+const httpStatus =  require('../helpers/httpStatus')
+const resMessage = require('../helpers/resMessage')
+const { Region, Company } = require('../models')
 const ApiError =  require('../utils/ApiError')
 
 /**
@@ -10,11 +11,11 @@ const ApiError =  require('../utils/ApiError')
 const createRegion = async(regionBody) => {
     try {
        if(await Region.isNameTaken(regionBody.name)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Name already exists');
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.REGION.NAME_EXISTS);
        }
 
        if(await Region.isCodeTaken(regionBody.code)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Code already exists');
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.REGION.CODE_EXISTS);
        }
 
        return Region.create(regionBody);
@@ -43,6 +44,11 @@ const queryRegions = async(filter, options) => {
  */
 const getRegionById = async(regionId) => {
     const region = await Region.findOne({_id: regionId})
+
+    if(!region) {
+        throw new ApiError(httpStatus.NOT_FOUND, resMessage.REGION.NOT_FOUND);
+    }
+    
     return region;
 }
 
@@ -58,15 +64,15 @@ const updateRegionById = async(regionId, regionBody) => {
         const region = await Region.findOne({ _id: regionId });
 
         if(!region) {
-            throw new ApiError(httpStatus.NOT_FOUND, 'Region not found');
+            throw new ApiError(httpStatus.NOT_FOUND, resMessage.REGION.NOT_FOUND);
         }
  
         if((regionBody) && await Region.isNameTaken(regionBody.name, regionId)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Name already exists');
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.REGION.NAME_EXISTS);
        }
 
        if((regionBody) && await Region.isCodeTaken(regionBody.code, regionId)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Code already exists');
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.REGION.CODE_EXISTS);
        }
 
        Object.assign(region, regionBody);
@@ -87,8 +93,13 @@ const deleteRegionById = async(regionId) => {
         const region = await Region.findOne({_id: regionId})
     
         if(!region) {
-            throw new ApiError(httpStatus.NOT_FOUND, 'Region not found');
+            throw new ApiError(httpStatus.NOT_FOUND, resMessage.REGION.NOT_FOUND);
         }
+        
+        // Delete Ref Docs.
+        await Company.deleteMany({region: regionId})
+        
+        // Delete Region
         await region.deleteOne();
         return region;
     } catch(error) {

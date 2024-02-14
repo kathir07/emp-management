@@ -11,19 +11,7 @@ const httpStatus = require('http-status')
 
 const sendResponse = (res, responseCode, responseData, message = '') => {
     responseCode = (responseCode) ? responseCode : 200;
-
-    switch (httpStatus[`${responseCode}_CLASS`]) {
-        case httpStatus.classes.CLIENT_ERROR:
-            responseSuccess = false
-        break;
-        case httpStatus.classes.SERVER_ERROR:
-            responseSuccess = false
-        break;
-        default:
-            responseSuccess = true
-        break;
-    }
-
+    responseSuccess = (responseCode < 300) ? true : false;
     res.status(responseCode).json({success: responseSuccess, data: responseData, message:message});
 }
 

@@ -1,5 +1,6 @@
-const httpStatus = require('http-status')
-const { Location } = require('../models')
+const httpStatus = require('../helpers/httpStatus')
+const resMessage =  require('../helpers/resMessage')
+const { Location, Company } = require('../models')
 const ApiError = require('../utils/ApiError')
 
 
@@ -12,7 +13,7 @@ const ApiError = require('../utils/ApiError')
 const createLocation = async(locationBody) => {
     try {
         if(await Location.isNameTaken(locationBody.name)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Name already taken');
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LOCATION.NAME_EXISTS);
         }
         return Location.create(locationBody)
     } catch(error) {
@@ -39,7 +40,11 @@ const queryLocations = async(filter, options) => {
  * @returns {Promise<Location>} 
 */
 const getLocationById = async(locationId) => {
-    return Location.findById(locationId); 
+    const location =  Location.findById(locationId); 
+    if(!location) {
+        throw new ApiError(httpStatus.NOT_FOUND, resMessage.LOCATION.NOT_FOUND);
+    }
+    return location
 }
 
 /** Update Location by ID
@@ -52,11 +57,11 @@ const updateLocationById = async(locationId, locationBody) => {
         const location = await Location.findOne({ _id: locationId });
 
         if(!location) {
-            throw new ApiError(httpStatus.NOT_FOUND, 'Location not found');
+            throw new ApiError(httpStatus.NOT_FOUND, resMessage.LOCATION.NOT_FOUND);
         }
 
         if(locationBody.name && await Location.isNameTaken(locationBody.name, locationId)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Location Name already taken');
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LOCATION.NAME_EXISTS);
         }
 
         Object.assign(location, locationBody);
@@ -78,8 +83,12 @@ const deleteLocation = async(locationId) => {
         const location = await Location.findById(locationId);
         
         if(!location) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Location not found')
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LOCATION.NOT_FOUND)
         }
+
+        // Delete Ref Docs.
+        await Company.deleteMany({location: locationId})
+    
         await location.deleteOne();
         return location;
     } catch(error) {

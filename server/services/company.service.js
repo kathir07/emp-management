@@ -1,4 +1,5 @@
-const httpStatus = require('http-status')
+const httpStatus =  require('../helpers/httpStatus')
+const resMessage =  require('../helpers/resMessage')
 const { Company } = require('../models')
 const ApiError = require('../utils/ApiError')
 
@@ -11,10 +12,10 @@ const ApiError = require('../utils/ApiError')
 const createCompany = async(companyBody) => {
     try{
         if(await Company.isNameTaken(companyBody.name)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Name already exists')
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.COMPANY.NAME_EXISTS)
         }
         if(await Company.isCodeTaken(companyBody.code)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Code already exists')
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.COMPANY.CODE_EXISTS)
         }
 
         return Company.create(companyBody)
@@ -44,7 +45,12 @@ const queryCompanies = async(filter, options) => {
  * @returns {Promise<Company>}
  */
 const getCompanyById =  async(companyId) => {
-    const company = Company.findOne({_id: companyId}).populate('region').populate('location')
+    const company = Company.findOne({_id: companyId}).populate('region', 'location')
+
+    if(!company) {
+        throw new ApiError(httpStatus.NOT_FOUND, resMessage.COMPANY.NOT_FOUND);
+    }
+
     return company;
 }
 
@@ -60,15 +66,15 @@ const updateCompanyById = async(companyId, companyBody) => {
         const company = await Company.findOne({ _id: companyId });
 
         if(!company) {
-            throw new ApiError(httpStatus.NOT_FOUND, 'Company not found');
+            throw new ApiError(httpStatus.NOT_FOUND, resMessage.COMPANY.NOT_FOUND);
         }
 
         if(companyBody.name && await Company.isNameTaken(companyBody.name, companyId)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Company Name already taken');
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.COMPANY.NAME_EXISTS);
         }
 
         if(companyBody.code && await Company.isCodeTaken(companyBody.code, companyId)) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Company Code already taken');
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.COMPANY.CODE_EXISTS);
         }
 
         Object.assign(company, companyBody);
@@ -90,7 +96,7 @@ const deleteCompany =  async(companyId) => {
         const company = await Company.findById(companyId)
 
         if(!company) {
-            throw new ApiError(httpStatus.BAD_REQUEST, 'Company not found')
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.COMPANY.NOT_FOUND)
         }
 
         await company.deleteOne();

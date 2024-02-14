@@ -1,8 +1,9 @@
-const httpStatus = require("http-status");
+const httpStatus = require('../helpers/httpStatus')
 const catchAsync = require("../utils/catchAsync");
 const sendResponse = require("../utils/sendResponse");
 const pick = require("../utils/pick")
-const { companyService } =  require('../services')
+const { companyService } =  require('../services');
+const resMessage = require('../helpers/resMessage');
 
 class CompanyController {
     constructor() {
@@ -11,7 +12,7 @@ class CompanyController {
 
     createCompany = catchAsync(async(req, res) => {
         const company = await companyService.createCompany(req.body)
-        sendResponse(res, httpStatus.CREATED, company, 'Company Created Successfully!')
+        sendResponse(res, httpStatus.CREATED, company, resMessage.COMPANY.CREATE_SUCCESS)
     })
 
     getCompanies = catchAsync(async(req, res) => {
@@ -28,13 +29,13 @@ class CompanyController {
 
     updateCompany = catchAsync(async(req, res) => {
         const company = await companyService.updateCompanyById(req.params.companyId, req.body)
-        sendResponse(res, httpStatus.OK, company, 'Company Updated Successfully!');
+        sendResponse(res, httpStatus.OK, company, resMessage.COMPANY.UPDATE_SUCCESS);
 
     })
 
     deleteCompany = catchAsync(async(req, res) => {
         await companyService.deleteCompany(req.params.companyId);
-        sendResponse(res, httpStatus.OK, '', 'Company Deleted Successfully!');
+        sendResponse(res, httpStatus.OK, '', resMessage.COMPANY.DELETE_SUCCESS);
     })
 }
 
