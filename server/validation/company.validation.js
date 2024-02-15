@@ -7,7 +7,7 @@ const createCompany = {
         code: Joi.string().trim().required(),
         region: Joi.string().custom(objectId),
         location: Joi.string().custom(objectId),
-        status: Joi.number().optional().min(0).min(1),
+        status: Joi.number().integer().optional().min(0).max(1),
     })
 }
 
@@ -26,7 +26,7 @@ const updateCompany = {
         code: Joi.string().trim().required(),
         region: Joi.string().custom(objectId),
         location: Joi.string().custom(objectId),
-        status: Joi.number().optional().min(0).min(1),
+        status: Joi.number().integer().min(0).max(1),
     }).min(1),
 }
 

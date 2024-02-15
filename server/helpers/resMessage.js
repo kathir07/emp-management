@@ -21,5 +21,12 @@ module.exports = {
         CREATE_SUCCESS: "Company Created Successfully",
         UPDATE_SUCCESS: "Company Updated Successfully",
         DELETE_SUCCESS: "Company Deleted Successfully",
+    },
+    DEPARTMENT: {
+        NAME_EXISTS: "Name already exists for selected Company",
+        NOT_FOUND: "Department not found",
+        CREATE_SUCCESS: "Department Created Successfully",
+        UPDATE_SUCCESS: "Department Updated Successfully",
+        DELETE_SUCCESS: "Department Deleted Successfully",
     }
 }

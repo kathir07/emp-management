@@ -1,8 +1,8 @@
 const express =  require('express')
-// const companyRoute = require('./company.route')
 const locationRoute = require('./location.route')
 const regionRoute = require('./region.route')
 const companyRoute = require('./company.route')
+const departmentRoute = require('./department.route')
 
 
 const router = express.Router();
@@ -19,6 +19,10 @@ const masterRoutes = [
     {
         'path': '/company',
         'route': companyRoute
+    },
+    {
+        'path': '/department',
+        'route': departmentRoute
     }
 ]
 
