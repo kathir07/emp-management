@@ -28,5 +28,12 @@ module.exports = {
         CREATE_SUCCESS: "Department Created Successfully",
         UPDATE_SUCCESS: "Department Updated Successfully",
         DELETE_SUCCESS: "Department Deleted Successfully",
+    },
+    USER_TYPE: {
+        TYPE_EXISTS: "User Type already exists",
+        NOT_FOUND: "User Type not found",
+        CREATE_SUCCESS: "User Type Created Successfully",
+        UPDATE_SUCCESS: "User Type Updated Successfully",
+        DELETE_SUCCESS: "User Type Deleted Successfully",
     }
 }

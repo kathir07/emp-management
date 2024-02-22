@@ -3,6 +3,7 @@ const locationRoute = require('./location.route')
 const regionRoute = require('./region.route')
 const companyRoute = require('./company.route')
 const departmentRoute = require('./department.route')
+const userTypeRoute = require('./userType.route')
 
 
 const router = express.Router();
@@ -23,6 +24,10 @@ const masterRoutes = [
     {
         'path': '/department',
         'route': departmentRoute
+    },
+    {
+        'path': '/user-type',
+        'route': userTypeRoute
     }
 ]
 
