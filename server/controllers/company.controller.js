@@ -19,12 +19,12 @@ class CompanyController {
         const filter = pick(req.query, [])
         const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate'])
         const result = await companyService.queryCompanies(filter, options)
-        sendResponse(res, httpStatus.SUCCESS, result);
+        sendResponse(res, httpStatus.OK, result);
     });
 
     getCompanyById = catchAsync(async(req, res) => {
         const company = await companyService.getCompanyById(req.params.companyId)
-        sendResponse(res, httpStatus.SUCCESS, company)
+        sendResponse(res, httpStatus.OK, company)
     })
 
     updateCompany = catchAsync(async(req, res) => {

@@ -20,7 +20,7 @@ class LocationController {
         const filter = pick(req.query, [])
         const options = pick(req.query, [])
         const result = await locationService.queryLocations(filter, options)
-        sendResponse(res, httpStatus.SUCCESS, result);
+        sendResponse(res, httpStatus.OK, result);
     });
 
     getLocationById = catchAsync( async(req, res) => {
@@ -28,7 +28,7 @@ class LocationController {
         if(!location) {
             throw new ApiError(httpStatus.NOT_FOUND, resMessage.LOCATION.NOT_FOUND);
         }
-        sendResponse(res, httpStatus.SUCCESS, location);
+        sendResponse(res, httpStatus.OK, location);
     })
 
     updateLocation = catchAsync( async(req, res) => {

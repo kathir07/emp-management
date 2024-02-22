@@ -19,14 +19,13 @@ class DepartmentController {
     getDepartments = catchAsync(async(req, res) => {
         const filter = pick(req.query, [])
         const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate'])
-        console.log(options)
         const result = await departmentService.queryDepartments(filter, options)
-        sendResponse(res, httpStatus.SUCCESS, result);
+        sendResponse(res, httpStatus.OK, result);
     })
 
     getDepartmentById = catchAsync(async(req, res) => {
         const department = await departmentService.getDepartmentById(req.params.departmentId)
-        sendResponse(res, httpStatus.SUCCESS, department)
+        sendResponse(res, httpStatus.OK, department)
     })
 
     updateDepartment = catchAsync(async(req, res) => {
