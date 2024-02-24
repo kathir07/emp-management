@@ -4,6 +4,7 @@ const regionRoute = require('./region.route')
 const companyRoute = require('./company.route')
 const departmentRoute = require('./department.route')
 const userTypeRoute = require('./userType.route')
+const leavePolicyRoute = require('./leavePolicy.route')
 
 
 const router = express.Router();
@@ -28,6 +29,10 @@ const masterRoutes = [
     {
         'path': '/user-type',
         'route': userTypeRoute
+    },
+    {
+        'path': '/leave-policy',
+        'route': leavePolicyRoute
     }
 ]
 

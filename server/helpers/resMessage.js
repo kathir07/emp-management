@@ -35,5 +35,12 @@ module.exports = {
         CREATE_SUCCESS: "User Type Created Successfully",
         UPDATE_SUCCESS: "User Type Updated Successfully",
         DELETE_SUCCESS: "User Type Deleted Successfully",
+    },
+    LEAVE_POLICY: {
+        NAME_EXISTS: "Name already exists for selected Company",
+        NOT_FOUND: "Leave Policy not found",
+        CREATE_SUCCESS: "Leave Policy Created Successfully",
+        UPDATE_SUCCESS: "Leave Policy Updated Successfully",
+        DELETE_SUCCESS: "Leave Policy Deleted Successfully",
     }
 }
