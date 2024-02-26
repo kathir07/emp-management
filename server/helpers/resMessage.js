@@ -42,5 +42,12 @@ module.exports = {
         CREATE_SUCCESS: "Leave Policy Created Successfully",
         UPDATE_SUCCESS: "Leave Policy Updated Successfully",
         DELETE_SUCCESS: "Leave Policy Deleted Successfully",
+    },
+    SHIFT_TIME: {
+        NAME_EXISTS: "Name already exists for selected Company",
+        NOT_FOUND: "Shift Time not found",
+        CREATE_SUCCESS: "Shift Time Created Successfully",
+        UPDATE_SUCCESS: "Shift Time Updated Successfully",
+        DELETE_SUCCESS: "Shift Time Deleted Successfully",
     }
 }
