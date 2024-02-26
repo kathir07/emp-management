@@ -36,7 +36,7 @@ class LeavePolicyController {
 
     deleteLeavePolicy =  catchAsync(async(req, res) => {
         await leavePolicyService.deleteLeavePolicyById(req.params.leavePolicyId)
-        sendResponse(req, httpStatus.OK, '', resMessage.LEAVE_POLICY.DELETE_SUCCESS)
+        sendResponse(res, httpStatus.OK, '', resMessage.LEAVE_POLICY.DELETE_SUCCESS)
     })
 }
 

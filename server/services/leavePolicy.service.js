@@ -68,7 +68,7 @@ const updateLeavePolicyById =  async(leavePolicyId, leavePolicyBody) => {
         }
     
         Object.assign(leavePolicy, leavePolicyBody)
-        Object.save();
+        leavePolicy.save();
         return leavePolicy
     } catch(error) {
         throw new ApiError(httpStatus.BAD_REQUEST, error)

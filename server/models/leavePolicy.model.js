@@ -14,34 +14,6 @@ const leavePolicySchema = new mongoose.Schema({
         ref: 'Company',
         required: true,
     },
-    start_date: {
-        type: Date,
-        required: true,
-    },
-    end_date: {
-        type: Date,
-        required: true,
-    },
-    total_earned_leave: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    total_sick_leave: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    total_optional_holiday: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
-    max_cont_leave: {
-        type: Number,
-        required: true,
-        default: 0,
-    },
     status: {
         type: Number,
         default: 1,
