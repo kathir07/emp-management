@@ -50,7 +50,7 @@ shiftTimeSchema.plugin(paginate)
  * @param {ObjectId} excludeShiftTimeId
  * @returns {Promise<Boolean>} 
  */
-shiftTimeSchema.isNameTaken = async function (name, companyId, excludeShiftTimeId) {
+shiftTimeSchema.statics.isNameTaken = async function (name, companyId, excludeShiftTimeId) {
     const result = (excludeShiftTimeId) ? await this.findOne({name: name, company: companyId, _id:{$ne: excludeShiftTimeId}}) : await this.findOne({name: name, company: companyId});
     
     return !!result;
