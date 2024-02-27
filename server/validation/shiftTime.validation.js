@@ -1,5 +1,5 @@
 const Joi = require('joi')
-const { objectId, endTimeNotBeforStartTime } = require('./custom.validation')
+const { objectId, endTimeNotBeforStartTime, breakTimeNotExceedShiftTime } = require('./custom.validation')
 
 const createShiftTime = {
     body: Joi.object().keys({
@@ -18,7 +18,7 @@ const createShiftTime = {
         break_time: Joi.object().keys({
             hour: Joi.number().integer().min(0).max(12).required(),
             minutes: Joi.number().integer().min(0).max(59).required(),
-        }).required(),
+        }).custom(breakTimeNotExceedShiftTime).required(),
         timezone: Joi.string().trim().required(),
         status: Joi.number().integer().optional().min(0).max(1),
     })
