@@ -18,7 +18,7 @@ class LocationController {
 
     getLocations = catchAsync(async(req, res) => {
         const filter = pick(req.query, [])
-        const options = pick(req.query, [])
+        const options = pick(req.query, ['sortBy', 'limit', 'page', 'populate'])
         const result = await locationService.queryLocations(filter, options)
         sendResponse(res, httpStatus.OK, result);
     });

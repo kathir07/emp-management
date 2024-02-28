@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 const objectId = (value, helpers) => {
     if(!value.match(/^[0-9a-fA-F]{24}$/)) {
         return helpers.message("{{#label}} must be valid id")
@@ -43,4 +45,17 @@ const breakTimeNotExceedShiftTime = (value, helpers) => {
     return value;
 }
 
-module.exports = {objectId, endTimeNotBeforStartTime, breakTimeNotExceedShiftTime}
+const dateFormat = (value, helpers) => {
+    const formats = ['DD-MM-YYYY', 'MM-DD-YYYY', 'YYYY-MM-DD', 'DD/MM/YYYY', 'MM/DD/YYYY', 'YYYY/MM/DD'];
+
+    for(let format of formats) {
+        const momentDate = moment(value, format, true)
+
+        if(momentDate.isValid()) {
+            return momentDate.format('YYYY-MM-DD')
+        } else {
+            return helpers.message("{{#label}} must be a valid Test")
+        }
+    }
+}
+module.exports = {objectId, endTimeNotBeforStartTime, breakTimeNotExceedShiftTime, dateFormat}

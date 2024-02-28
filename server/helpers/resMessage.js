@@ -49,5 +49,12 @@ module.exports = {
         CREATE_SUCCESS: "Shift Time Created Successfully",
         UPDATE_SUCCESS: "Shift Time Updated Successfully",
         DELETE_SUCCESS: "Shift Time Deleted Successfully",
+    },
+    LEAVE_POLICY_DETAIL: {
+        ACTIVE_EXISTS: "Active Leave details already exists for selected Leave Policy",
+        NOT_FOUND: "Leave Policy Detail not found",
+        CREATE_SUCCESS: "Leave Policy Detail Created Successfully",
+        UPDATE_SUCCESS: "Leave Policy Detail Updated Successfully",
+        DELETE_SUCCESS: "Leave Policy Detail Deleted Successfully",
     }
 }

@@ -11,7 +11,7 @@ const validate = (schema) => (req, res, next) => {
 
     if(error) {
         const errorMessage = error.details.map((details) => details.message).join(', ');
-        return next(sendResponse(res, httpStatus.BAD_REQUEST, '', errorMessage));
+        return sendResponse(res, httpStatus.BAD_REQUEST, '', errorMessage);
     }
 
     Object.assign(req, value);
