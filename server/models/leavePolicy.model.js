@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const Company =  require('./company.model')
 const { toJSON, paginate } = require('./plugins')
 
 const leavePolicySchema = new mongoose.Schema({

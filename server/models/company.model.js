@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const { toJSON, paginate } = require('./plugins');
-const Region = require('./region.model')
-const Location = require('./location.model')
 
 const companySchema = new mongoose.Schema({
     name: {

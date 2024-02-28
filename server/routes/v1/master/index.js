@@ -7,6 +7,7 @@ const userTypeRoute = require('./userType.route')
 const leavePolicyRoute = require('./leavePolicy.route')
 const shiftTimeRoute = require('./shiftTime.route')
 const leavePolicyDetailRoute = require('./leavePolicyDetail.route')
+const holidayPolicyRoute = require('./holidayPolicy.route')
 
 
 
@@ -44,6 +45,10 @@ const masterRoutes = [
     {
         'path': '/leave-policy-detail',
         'route': leavePolicyDetailRoute
+    },
+    {
+        'path': '/holiday-policy',
+        'route': holidayPolicyRoute
     }
 ]
 

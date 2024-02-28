@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const { toJSON, paginate } =  require('./plugins')
-const Company = require('./company.model')
 
 const departmentSchema = new mongoose.Schema({
     name: {

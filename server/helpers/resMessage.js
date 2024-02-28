@@ -56,5 +56,12 @@ module.exports = {
         CREATE_SUCCESS: "Leave Policy Detail Created Successfully",
         UPDATE_SUCCESS: "Leave Policy Detail Updated Successfully",
         DELETE_SUCCESS: "Leave Policy Detail Deleted Successfully",
-    }
+    },
+    HOLIDAY_POLICY: {
+        NAME_EXISTS: "Name already exists for selected Company",
+        NOT_FOUND: "Holiday Policy not found",
+        CREATE_SUCCESS: "Holiday Policy Created Successfully",
+        UPDATE_SUCCESS: "Holiday Policy Updated Successfully",
+        DELETE_SUCCESS: "Holiday Policy Deleted Successfully",
+    },
 }

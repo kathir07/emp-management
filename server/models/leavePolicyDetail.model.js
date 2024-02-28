@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { LeavePolicy, Company } = require('../models')
 const { toJSON, paginate } = require('./plugins')
 const formatDate = require('../utils/formatDate')
 
@@ -44,7 +43,7 @@ const leavePolicyDetailSchema = new mongoose.Schema({
         required: true,
         default: 1
     }
-})
+}, { timestamps: true})
 
 // add plugin that converts mongoose to document
 leavePolicyDetailSchema.plugin(toJSON)

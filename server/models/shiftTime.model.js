@@ -1,5 +1,4 @@
 const mongoose =  require('mongoose')
-const { Company } =  require('../models')
 const {toJSON, paginate} =  require('./plugins')
 
 const shiftTimeSchema = new mongoose.Schema({
