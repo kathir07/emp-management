@@ -7,7 +7,7 @@ const createRegion = {
         code: Joi.string().trim().required(),
         currency: Joi.string().trim().required(),
         timezone: Joi.string().trim().required(),
-        status: Joi.number().optional().min(0).min(1),
+        status: Joi.number().integer().optional().min(0).max(1),
     })
 }
 
@@ -27,7 +27,7 @@ const updateRegion = {
         code: Joi.string().trim().required(),
         currency: Joi.string().trim().required(),
         timezone: Joi.string().trim().required(),
-        status: Joi.number().optional().min(0).min(1),
+        status: Joi.number().integer().min(0).max(1),
     }).min(1),
 }
 

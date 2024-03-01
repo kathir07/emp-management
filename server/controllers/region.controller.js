@@ -18,9 +18,9 @@ class RegionController {
 
     getRegions = catchAsync(async(req, res) =>{
         const filter = pick(req.query, [])
-        const options = pick(req.query, [])
+        const options = pick(req.query,  ['sortBy', 'limit', 'page', 'populate'])
         const result = await regionService.queryRegions(filter, options);
-        sendResponse(res, httpStatus.SUCCESS, result);
+        sendResponse(res, httpStatus.OK, result);
     })
 
     getRegionById = catchAsync(async(req, res) => {
@@ -28,7 +28,7 @@ class RegionController {
         if(!region) {
             throw new ApiError(httpStatus.NOT_FOUND, resMessage.REGION.NOT_FOUND);
         }
-        sendResponse(res, httpStatus.SUCCESS, region);
+        sendResponse(res, httpStatus.OK, region);
     })
 
     updateRegion = catchAsync(async(req, res) => {
