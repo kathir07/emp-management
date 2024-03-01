@@ -40,13 +40,18 @@ const queryLeavePolicyDetails = async(filter, options) => {
  * @return {Promise<Result>}
  */
 const getLeavePolicyDetailById = async(leavePolicyDetailId) => {
-    const leavePolicyDetail = await LeavePolicyDetail.findOne({_id: leavePolicyDetailId}).populate('leave_policy')
+    try{
+        const leavePolicyDetail = await LeavePolicyDetail.findOne({_id: leavePolicyDetailId}).populate('leave_policy')
 
-    if(!leavePolicyDetail) {
-        throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LEAVE_POLICY_DETAIL.NOT_FOUND)
+        if(!leavePolicyDetail) {
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LEAVE_POLICY_DETAIL.NOT_FOUND)
+        }
+    
+        return leavePolicyDetail;
+    } catch(error) {
+        throw new ApiError(httpStatus.BAD_REQUEST, error)
     }
-
-    return leavePolicyDetail;
+   
 }
 
 /**
@@ -56,19 +61,24 @@ const getLeavePolicyDetailById = async(leavePolicyDetailId) => {
  * @return {Promise<LeavePolicyDetail>}
  */
 const updateLeavePolicyDetailById = async(leavePolicyDetailId, leavePolicyDetailBody) => {
-    const leavePolicyDetail = await LeavePolicyDetail.findOne({_id: leavePolicyDetailId}).populate('leave_policy')
+    try {
+        const leavePolicyDetail = await LeavePolicyDetail.findOne({_id: leavePolicyDetailId}).populate('leave_policy')
 
-    if(!leavePolicyDetail) {
-        throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LEAVE_POLICY_DETAIL.NOT_FOUND)
+        if(!leavePolicyDetail) {
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LEAVE_POLICY_DETAIL.NOT_FOUND)
+        }
+
+        if(await LeavePolicyDetail.isActiveLeaveDetailExists(leavePolicyDetailBody.leave_policy, leavePolicyDetailId)) {
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LEAVE_POLICY_DETAIL.ACTIVE_EXISTS)
+        }
+
+        Object.assign(leavePolicyDetail, leavePolicyDetailBody)
+        leavePolicyDetail.save()
+        return leavePolicyDetail
+    } catch(error) {
+        throw new ApiError(httpStatus.BAD_REQUEST, error)
     }
-
-    if(await LeavePolicyDetail.isActiveLeaveDetailExists(leavePolicyDetailBody.leave_policy, leavePolicyDetailId)) {
-        throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LEAVE_POLICY_DETAIL.ACTIVE_EXISTS)
-    }
-
-    Object.assign(leavePolicyDetail, leavePolicyDetailBody)
-    leavePolicyDetail.save()
-    return leavePolicyDetail
+    
 }
 
 /**
@@ -77,14 +87,19 @@ const updateLeavePolicyDetailById = async(leavePolicyDetailId, leavePolicyDetail
  * @return {Promise<Result>}
  */
 const deleteLeavePolicyDetail = async(leavePolicyDetailId) => {
-    const leavePolicyDetail = await LeavePolicyDetail.findOne({_id: leavePolicyDetailId}).populate('leave_policy')
+    try {
+        const leavePolicyDetail = await LeavePolicyDetail.findOne({_id: leavePolicyDetailId}).populate('leave_policy')
 
-    if(!leavePolicyDetail) {
-        throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LEAVE_POLICY_DETAIL.NOT_FOUND)
+        if(!leavePolicyDetail) {
+            throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LEAVE_POLICY_DETAIL.NOT_FOUND)
+        }
+
+        await leavePolicyDetail.deleteOne();
+        return leavePolicyDetail;
+    } catch(error) {
+        throw new ApiError(httpStatus.BAD_REQUEST, error)
     }
-
-    await leavePolicyDetail.deleteOne();
-    return leavePolicyDetail;
+    
 }
 
 module.exports = {createLeavePolicyDetail, queryLeavePolicyDetails, getLeavePolicyDetailById, updateLeavePolicyDetailById, deleteLeavePolicyDetail}

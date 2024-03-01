@@ -64,4 +64,10 @@ module.exports = {
         UPDATE_SUCCESS: "Holiday Policy Updated Successfully",
         DELETE_SUCCESS: "Holiday Policy Deleted Successfully",
     },
+    HOLIDAY_POLICY_DETAIL: {
+        ACTIVE_EXISTS: "Same active Holiday already exists for selected Holiday Policy",
+        NOT_FOUND: "Holiday Policy Detail Created Successfully",
+        UPDATE_SUCCESS: "Holiday Policy Detail Updated Successfully",
+        DELETE_SUCCESS: "Holiday Policy Detail Deleted Successfully",
+    },
 }

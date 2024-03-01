@@ -8,6 +8,7 @@ const leavePolicyRoute = require('./leavePolicy.route')
 const shiftTimeRoute = require('./shiftTime.route')
 const leavePolicyDetailRoute = require('./leavePolicyDetail.route')
 const holidayPolicyRoute = require('./holidayPolicy.route')
+const holidayPolicyDetailRoute = require('./holidayPolicyDetail.route')
 
 
 
@@ -49,6 +50,10 @@ const masterRoutes = [
     {
         'path': '/holiday-policy',
         'route': holidayPolicyRoute
+    },
+    {
+        'path': '/holiday-policy-detail',
+        'route': holidayPolicyDetailRoute
     }
 ]
 
