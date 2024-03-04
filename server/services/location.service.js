@@ -15,7 +15,7 @@ const createLocation = async(locationBody) => {
         if(await Location.isNameTaken(locationBody.name)) {
             throw new ApiError(httpStatus.BAD_REQUEST, resMessage.LOCATION.NAME_EXISTS);
         }
-        return Location.create(locationBody)
+        return await Location.create(locationBody)
     } catch(error) {
         throw new ApiError(httpStatus.BAD_REQUEST, error);
     }

@@ -70,4 +70,11 @@ module.exports = {
         UPDATE_SUCCESS: "Holiday Policy Detail Updated Successfully",
         DELETE_SUCCESS: "Holiday Policy Detail Deleted Successfully",
     },
+    ROLE: {
+        NAME_EXISTS: "Name already exists",
+        NOT_FOUND: "Role not found",
+        CREATE_SUCCESS: "Role Created Successfully",
+        UPDATE_SUCCESS: "Role Updated Successfully",
+        DELETE_SUCCESS: "Role Deleted Successfully",
+    },
 }
