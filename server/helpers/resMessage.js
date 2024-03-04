@@ -77,4 +77,11 @@ module.exports = {
         UPDATE_SUCCESS: "Role Updated Successfully",
         DELETE_SUCCESS: "Role Deleted Successfully",
     },
+    USER: {
+        NAME_EXISTS: "Name already exists",
+        NOT_FOUND: "User not found",
+        CREATE_SUCCESS: "User Created Successfully",
+        UPDATE_SUCCESS: "User Updated Successfully",
+        DELETE_SUCCESS: "User Deleted Successfully",
+    }
 }

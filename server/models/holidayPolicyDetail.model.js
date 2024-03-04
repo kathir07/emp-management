@@ -28,7 +28,7 @@ const holidayPolicyDetailSchema = new mongoose.Schema({
         type: Number,
         default: 1,
     }
-})
+}, { timestamps: true})
 
 // add plugin converts plugin to json
 holidayPolicyDetailSchema.plugin(toJSON)

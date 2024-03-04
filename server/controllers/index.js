@@ -9,3 +9,4 @@ module.exports.LeavePolicyDetailController = require('./leavePolicyDetail.contro
 module.exports.HolidayPolicyController = require('./holidayPolicy.controller')
 module.exports.HolidayPolicyDetailController = require('./holidayPolicyDetail.controller')
 module.exports.RoleController = require('./role.controller')
+module.exports.UserController = require('./user.controller')
